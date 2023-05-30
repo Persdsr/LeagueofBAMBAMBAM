@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Создание билда{% endblock %}
+
+{% block content %}
+    <div id="mainImageContainer">
+        <img id="mainImage" src="https://cdn-icons-png.flaticon.com/512/3736/3736216.png"
+             style="width: 60px; height: 60px;" alt="Основное изображение">
+        <div id="thumbnailContainer">
+            {% for item in items %}
+                <img src="{{ item.image }}" alt="{{ item.name }}" class="item thumbnail" data-name="{{ item.name }}">
+                <input type="hidden" name="{{ item.id }}" value="" class="selected_items">
+            {% endfor %}
+        </div>
+    </div>
+
+    <form method="POST" id="build_form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="my_array" id="my_array_input">
+        <button type="submit" id="my-button">Отправить</button>
+    </form>
+
+    <div id="block_items">
+
+    </div>
+
+    <script>
+        const items = {};
+        const itemEls = document.querySelectorAll('.item');
+        const myButton = document.getElementById('my-button');
+        const buildForm = document.getElementById('build_form');
+        const myArrayInput = document.getElementById('my_array_input');
+        let block_items = document.getElementById('block_items');
+
+        itemEls.forEach((itemEl) => {
+            itemEl.addEventListener('click', () => {
+                const name = itemEl.getAttribute('data-name');
+                const image = itemEl.getAttribute('src')
+                items[name] = image
+                console.log(items)
+                let block_image = document.createElement('img')
+                let block_next = document.createElement('img')
+                block_image.src = image
+                block_next.src = 'https://w7.pngwing.com/pngs/68/730/png-transparent-arrow-computer-icons-right-arrow-angle-black-internet.png'
+                block_next.style.width = '70px'
+                block_next.style.height = '65px'
+                block_items.appendChild(block_image)
+                block_items.appendChild(block_next)
+            });
+        });
+        buildForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            myArrayInput.value = JSON.stringify(items);
+
+            const formData = new FormData(buildForm);
+            fetch("{% url 'build_create' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: formData
+            })
+        });
+
+    </script>
+    <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

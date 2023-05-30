@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <section class="champions">
+        <div class="container">
+            <div class="champions__row">
+                {% for champ in champs %}
+                <div class="champions__column">
+                    <div class="champions__item">
+                        <img class="champion_poster" src="{{ champ.image }}" alt="{{ champ.name }}">
+                        <div class="champion-front">{{ champ.name }}</div>
+                        <div class="champion-back">
+                            <ul class="champions__ul">
+                            <li class="champions__li"><a class="champions__a" href="{% url 'champion_info' champ.id %}">БАЗА</a></li>
+                                {% for build in builds %}
+                                    {% if build.champion == champ.id %}
+                                    <li class="champions__li"><a class="champions__a" href="{{ build.get_absolute_url }}">{{ build.author }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

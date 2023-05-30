@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Угадайка{% endblock %}
+
+{% block content %}
+    <img src="{% static 'crop_img/' %}{{ img_name }}.jpg" alt="">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br>
+    <h1>Ответ: {{ answer }}</h1>
+    <img src="{{ splash }}" alt="">
+
+{% endblock %}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<header class="header">
+				<div class="container">
+					<div class="header__row">
+						<a href="{% url 'home' %}" class="header__icon">
+							<img src="{% static 'img/gigachad.jpg' %}" alt="">
+						</a>
+						<nav class="header__nav">
+							<ul class="header__ul">
+								<li class="header__li"><a href="{% url 'champs' %}" class="header__a">Персонажи</a></li>
+								<li class="header__li"><a href="" class="header__a">text</a></li>
+								<li class="header__li"><a href="{% url 'splash_quiz' %}" class="header__a">Угадайка</a></li>
+								<li class="header__li"><a href="" class="header__a">{{ user.username }}</a></li>
+								<li class="header__li"><a href="" class="header__a">Гайд</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<main class="main">
+				{% block content %}{% endblock %}
+				<!--<section class="forms">
+					<div class="container">
+						<div class="forms__row">
+							<div class="forms__column">
+								<h3 class="forms__title title">Зачилься</h3>
+								<form name="formReg" class="forms__register" action="#">
+									<input type="text" class="forms__username" placeholder="Введите имя пользователя" readonly
+										onfocus="this.removeAttribute('readonly')">
+									<input type="email" class="forms__usermail" placeholder="Введите почту" readonly
+										onfocus="this.removeAttribute('readonly')">
+									<input type="password" class="forms__userpass" placeholder="Введите пароль" readonly
+										onfocus="this.removeAttribute('readonly')">
+									<input type="password" class="forms__userpass" placeholder="Введите пароль" readonly
+										onfocus="this.removeAttribute('readonly')">
+									<button class="forms__button"><span>Зарегистрироваться</span></button>
+									<div class="forms__img">
+										<img src="{% static 'img/35115435_640x640.png' %}" alt="">
+									</div>
+									</form>
+							</div>
+							<div class="forms__column">
+								<h3 class="forms__title title">Или ты уже <span>Смешарик</span>?</h3>
+								<form name="formLog" class="forms__login" action="#">
+									<input type="text" class="forms__username" placeholder="Введите имя пользователя" readonly
+										onfocus="this.removeAttribute('readonly')">
+									<input type="password" class="forms__userpass" placeholder="Введите пароль" readonly
+										onfocus="this.removeAttribute('readonly')">
+									<button class="forms__button"><span>Войти</span></button>
+									<div class="forms__img">
+										<img src="{% static 'img/rhaast.png' %}" alt="">
+										<div class="forms__img_hidden">
+											<img src="{% static 'img/rhaastSMASHING_w_trans.png' %}" alt="">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</section>-->
+			</main>
+
+			<footer class="footer"></footer>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jarallax@2/dist/jarallax.min.js"></script>
+		<!--<script src="{% static 'js/SmoothScroll.js' %}"></script>-->
+		<script src="{% static 'js/script.js' %}"></script>
+	</body>
+</html>

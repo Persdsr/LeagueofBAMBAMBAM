@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <section class="gigachad">
+        <div class="container">
+            <h2 class="gigachad__title title">Будь <span>Гигачадом</span></h2>
+            <div class="swiper-container swiper1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img class="swiper-poster" src="{% static 'img/Sett_C.jpg' %}" alt="">
+                        <img class="swiper-slide-1 transparent-image" src="{% static 'img/gigachad2.jpg' %}" alt="">
+                        <div class="swiper-slide-1"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="swiper-slide-1"></div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+    <section class="memes">
+        <div class="container">
+            <h2 class="memes__title title">Стань <span>неукротимым</span></h2>
+            <form id="my-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Отравить</button>
+            </form>
+            <span>{{ error }}</span>
+            <video style="width: 200px; height: 300px; display: none;" preload="auto" src="/" controls id="video_player"></video>
+            <div id="meme_row" class="memes__row">
+                {% for meme in memes %}
+                    <div class="memes__column">
+                        <div class="memes__item">
+                            <video class="mem_videos" preload="auto" controls src="{{ meme.file.url }}"></video>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <section class="hello">
+        <div class="container">
+            <div class="hello__item jarallax">
+                <h2 class="hello__title">О чем думают <span>эксперты?</span></h2>
+                <div class="hello__item_row">
+                    <div class="hello__item_subitem">
+                        <div class="hello__item_text">
+                            <div class="hello__item_usertext">Они еще не знают, что я пикну Азира в сапы</div>
+                            <div class="hello__item_username">- Ferilax</div>
+                        </div>
+                        <div class="hello__item_icon">
+                            <img src="//lolg-cdn.porofessor.gg/img/d/summonerIcons/12.17/64/2076.png" alt="">
+                        </div>
+                    </div>
+                    <div class="hello__item_subitem">
+                        <div class="hello__item_text">
+                            <div class="hello__item_usertext">Да меня убили рандомным скилом в тимфайте, да он не был
+                                нацелен на меня, и что? Это не значит что адк плохая роль
+                            </div>
+                            <div class="hello__item_username">- Reixter</div>
+                        </div>
+                        <div class="hello__item_icon">
+                            <img src="//lolg-cdn.porofessor.gg/img/d/summonerIcons/12.17/64/11.png" alt="">
+                        </div>
+                    </div>
+                    <div class="hello__item_subitem">
+                        <div class="hello__item_text">
+                            <div class="hello__item_usertext">Контроль волны? Следить за вражеским лесником? Ждать ганги
+                                от своего лесника? Знать лимиты вражеского чемпиона? Ты уверен, что это нужно для победы
+                                на лайне?
+                            </div>
+                            <img src="{% static '/img/gigachad.jpg' %}" alt="">
+                            <div class="hello__item_username">- Elorz</div>
+                        </div>
+                        <div class="hello__item_icon">
+                            <img src="//lolg-cdn.porofessor.gg/img/d/summonerIcons/12.17/64/5213.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="kings">
+        <div class="container">
+            <div class="kings__body">
+                <div class="kings__item jarallax"></div>
+                <div class="kings__item jarallax"></div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const fileInput = document.getElementById('fileInput')
+        const videoPlayer = document.getElementById('video_player')
+
+        fileInput.addEventListener('change', function () {
+            videoPlayer.style.display = 'block'
+            const file = this.files[0]
+            const fileURL = URL.createObjectURL(file)
+
+            videoPlayer.src = fileURL
+        })
+    </script>
+{% endblock %}

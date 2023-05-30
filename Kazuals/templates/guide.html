@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ champ.name }} гайд{% endblock %}
+
+{% block content %}
+    <img src="{{ champ.sprite }}" alt="123" class="champion__sprite">
+    <br><br><br><br>
+    <h2>{{ champ.name }}</h2>
+    <h2>{{ champ.author }}</h2>
+    {% for item in items %}
+        <h2>{{ item.name }}</h2>
+        <img src="{{ item.image }}" alt="" style="height: 50px; width: 50px">
+    {% endfor %}
+
+
+{% endblock %}
